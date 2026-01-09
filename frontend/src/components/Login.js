@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_ENDPOINTS } from '../config';
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
@@ -12,7 +13,7 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
     setError('');
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/login', { username, password });
+      const response = await axios.post(API_ENDPOINTS.AUTH.LOGIN, { username, password });
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('role', response.data.role);
